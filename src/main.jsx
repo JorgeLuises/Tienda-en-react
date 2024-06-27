@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import PorductDetailPage from './pages/ProductDetailPage';
+import MainLayout from './layout/MainLayout';
 
 //REACT-ROUTER-BROWSER es una librería de react que ayuda a crear varias rutas en una pagina web, pero en realidad solo se ocupa una sola pagina y en esa misma pagina se renderiza todos nuestros elementos 
 
@@ -16,20 +17,26 @@ import PorductDetailPage from './pages/ProductDetailPage';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />
+    element: <MainLayout />,
+    children: [
+      {
+        path:'/',
+        element: <HomePage />
+      },
+      {
+        path:'/productos',
+        element: <ProductsPage />
+      },
+      {
+        path: '/productos/:id',
+        element: <PorductDetailPage />
+      }
+    ]
   },
   {
     path:'/login',
     element: <LoginPage /> //Importamos los eleentos de login
   },
-  {
-    path:'/productos',
-    element: <ProductsPage />
-  },
-  {
-    path: '/productos/:id',
-    element: <PorductDetailPage />
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
